@@ -1,19 +1,12 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.20;
 
-contract MTK {
-    string public name = "Monster Token";
-    string public symbol = "MTK";
-    address public owner;
-    uint256 public totalSupply = 1000000000;
+import { ERC20 } from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+
+contract MTK is ERC20 {
     mapping(address => uint256) balances;
 
-    constructor() {
-        owner = msg.sender;
-        balances[owner] = totalSupply;
-    }
-
-    function balanceOf(address account) public view returns (uint256) {
-        return balances[account];
+    constructor() ERC20("Monster Token", "MTK") {
+        _mint(msg.sender, 1000000000);
     }
 }
